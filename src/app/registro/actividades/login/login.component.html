@@ -1,0 +1,24 @@
+<div id="contenedor">
+    <div id="contenedorcentrado">
+      <div id="login">
+        <form id="loginform">
+          <label for="usuario" style="color:#000000;">Usuario</label>
+          <input id="usuario" type="text" name="usuario" placeholder="Usuario" required>
+  
+          <label for="password" style="color:#000000;">Contraseña</label>
+          <input id="password" type="password" placeholder="Contraseña" name="password" required>
+  
+          <div style="text-align: center;">
+            <button   pButton pRipple type="button" (click)="enviar_registro()" label="Ingresar" class="p-button-warning" style="margin-right: 10px;">
+            </button>
+            <p-progressSpinner *ngIf="true" [style]="{width: '35px', height: '35px'}" styleClass="custom-spinner" strokeWidth="8"
+              fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+          </div>
+        </form>
+      </div>
+      <div id="derecho">
+        <img src="../assets/logo.png">  
+        <hr>
+      </div>
+    </div>
+  </div>

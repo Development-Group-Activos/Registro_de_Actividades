@@ -1,0 +1,103 @@
+<div id="contenedor">
+    <div class=" text-center">
+        <div class=" font-bold text-5xl">
+            
+            <span class="text-white">Registro de Actividades</span>
+        </div>
+    </div>
+    <div class="card" style="margin: 2rem;" >
+        <div class="col-12">
+            <br>
+            <div class="p-fluid grid">              
+                <div class="col-12 md:col-6">
+                    <p-dropdown [options]="cities" placeholder="Temporalidad" [editable]="true" optionLabel="name">
+                    </p-dropdown>
+                </div>
+                <div class="col-12 md:col-6">
+                    <p-dropdown [options]="cities" placeholder="Empresa Usuario" [editable]="true" optionLabel="name">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <p-calendar inputId="basic" placeholder="Fecha"></p-calendar>
+                </div>
+                <div class="col-12 md:col-6">
+                    <p-dropdown [options]="cities" placeholder="Operacion" [editable]="true" optionLabel="name">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <p-dropdown [options]="cities" placeholder="Dep Funcionalidad" [editable]="true" optionLabel="name">
+                    </p-dropdown>
+                </div>
+                <div class="col-12 md:col-6">
+                    <p-dropdown [options]="cities" placeholder="Radicado Solicitud" [editable]="true"
+                        optionLabel="name">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-6">
+                    <textarea rows="5" cols="30" placeholder="Descripcion" pInputTextarea
+                        [autoResize]="true"></textarea>
+                </div>
+                <div class="col-12 md:col-6">
+                    <p-inputNumber mode="decimal" placeholder="Tiempo" [showButtons]="true" inputId="minmax-buttons"
+                        [min]="1" [max]="9">
+                    </p-inputNumber>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="p-fluid grid">
+                <div class="col-12 md:col-4">
+                </div>
+                <div class="col-12 md:col-2">
+                    <button pButton pRipple type="button" label="Success" class="p-button-success"></button>
+                </div>
+                <div class="col-12 md:col-2">
+                    <button pButton pRipple type="button" label="Warning" class="p-button-warning"></button>
+                </div>
+                <div class="col-12 md:col-4">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <p-table  [tableStyle]="{'min-width': '50rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="text-align: center;">Code</th>
+                        <th style="text-align: center;">Name</th>
+                        <th style="text-align: center;">Category</th>
+                        <th style="text-align: center;"> Quantity</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body">
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <br>
+</div>
