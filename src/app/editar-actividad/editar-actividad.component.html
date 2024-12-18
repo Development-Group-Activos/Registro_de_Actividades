@@ -1,0 +1,106 @@
+<div class="container">
+  <form
+    class="formActividad row g-4 col-sm-12 col-md-10 col-lg-6"
+    [formGroup]="formEditar"
+  >
+    <h1>Edicion de Actividad</h1>
+    <div class="col-sm-12 col-md-6 col-lg-5">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="actActividad"
+          [options]="operacion"
+          optionLabel="ddoElemento"
+          optionValue="ddoElemento"
+          [filter]="true"
+          [showClear]="true"
+          placeholder="Seleccione un opcion"
+          inputId="operacion"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <label for="operacion">Operacion</label>
+      </span>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-7">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="actDependencia"
+          [options]="dependencia"
+          optionLabel="depNombre"
+          optionValue="depCodigo"
+          [filter]="true"
+          [showClear]="true"
+          placeholder="Seleccione un opcion"
+          inputId="depFuncional"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <label for="depFuncional" class="form-label"
+          >Dependencia Funcional</label
+        >
+      </span>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="radicacion"
+          [options]="radicacion"
+          optionLabel="descripcion"
+          optionValue="radicacion"
+          [filter]="true"
+          [showClear]="true"
+          inputId="proyecto"
+          placeholder="Seleccione un opcion"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="56"
+          [style]="{ width: '100%' }"
+        >
+        </p-dropdown>
+        <label for="proyecto" class="form-label">Proyecto</label>
+      </span>
+    </div>
+    <div class="col-12">
+      <span class="p-float-label">
+        <textarea
+          class="form-control"
+          inputId="descripcion"
+          rows="3"
+          style="resize: none"
+          [style]="{ width: '100%' }"
+          pInputTextarea
+          formControlName="actDescripcion"
+        >
+        </textarea>
+        <label for="descripcion" class="form-label">Descripcion</label>
+      </span>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <span class="p-float-label">
+        <p-inputNumber
+          inputId="inputnumber"
+          mode="decimal"
+          formControlName="actTiempo"
+          [minFractionDigits]="0"
+          [maxFractionDigits]="2"
+          [style]="{ width: '25%' }"
+        ></p-inputNumber>
+        <label for="inputnumber">Tiempo invertido</label>
+      </span>
+    </div>
+    <div class="mt-4 mb-4 col-lg-5 col-md-4 col-sm-6">
+      <button
+        type="button"
+        class="btn-block btn btn-warning"
+        (click)="editarActividad()"
+      >
+        Guardar cambios
+      </button>
+    </div>
+    <div class="mt-4 mb-4 col-lg-3 col-md-1 col-sm-6">
+      <button
+        type="button"
+        class="btn-block btn btn-success"
+        routerLink="/registro/{{usuario}}" (click)="volver()">
+        Volver
+      </button>
+    </div>
+  </form>
+</div>

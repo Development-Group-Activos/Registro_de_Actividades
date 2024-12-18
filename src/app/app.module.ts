@@ -1,51 +1,44 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {ButtonModule} from 'primeng/button';
-import {InputTextModule} from 'primeng/inputtext';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { LoginComponent } from './registro/actividades/login/login.component';
-import { RegistroComponent } from './registro/actividades/registro/registro.component';
-import {InputMaskModule} from 'primeng/inputmask';
-import {CardModule} from 'primeng/card';
-import {DropdownModule} from 'primeng/dropdown';
+import { ActividadComponent } from './actividad/actividad.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditarActividadComponent } from './editar-actividad/editar-actividad.component';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {TableModule} from 'primeng/table';
-import {CalendarModule} from 'primeng/calendar';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {TooltipModule} from 'primeng/tooltip';
-import {DividerModule} from 'primeng/divider';
-import {FieldsetModule} from 'primeng/fieldset';
-
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TableModule } from 'primeng/table';
+import {KnobModule} from 'primeng/knob';
+import { FormsModule } from '@angular/forms';
+import { TooltipModule } from 'primeng/tooltip';
+import { BadgeModule } from 'primeng/badge';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegistroComponent,
-  ],
+  declarations: [AppComponent, ActividadComponent, EditarActividadComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
-    InputTextareaModule,
-    ButtonModule,
-    InputTextModule,
-    ProgressSpinnerModule,
-    InputMaskModule,
-    CardModule,
-    DropdownModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    TableModule,
     CalendarModule,
+    DropdownModule,
     InputNumberModule,
+    TableModule,
+    KnobModule,
+    FormsModule,
     TooltipModule,
-    DividerModule,
-    FieldsetModule   
+    BadgeModule,
+    InputTextareaModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

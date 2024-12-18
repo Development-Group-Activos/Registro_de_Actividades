@@ -1,0 +1,195 @@
+<div class="container">
+  <form
+    class="formActividad row g-4 col-sm-12 col-md-10 col-lg-6"
+    [formGroup]="formCrear"
+  >
+    <h1>Registro de Actividades</h1>
+    <div class="col-sm-10 col-md-10 col-lg-4">
+      <span class="p-float-label">
+        <p-calendar
+          inputId="fecha"
+          formControlName="actFecha"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          [style]="{ width: '100%' }"
+          pTooltip="Ingrese la fecha de la actividad"
+        ></p-calendar>
+        <label for="calendar">Fecha</label>
+      </span>
+    </div>
+    <div class="mt-4 col-sm-1 col-md-1 col-lg-1">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="buscarActividad()"
+        title="Buscar"
+        pTooltip="Buscar actividades en al fecha indicada"
+      >
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-7">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="actActividad"
+          [options]="operacion"
+          optionLabel="ddoElemento"
+          optionValue="ddoElemento"
+          [filter]="true"
+          [showClear]="true"
+          placeholder="Seleccione un opcion"
+          inputId="operacion"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <label for="operacion">Operacion</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-4">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="actDependencia"
+          [options]="dependencia"
+          optionLabel="depNombre"
+          optionValue="depCodigo"
+          [filter]="true"
+          [showClear]="true"
+          placeholder="Seleccione un opcion"
+          inputId="depFuncional"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <label for="depFuncional" class="form-label"
+          >Dependencia Funcional</label
+        >
+      </span>
+    </div>
+
+    <div class="col-12 lg:col-12">
+      <span class="p-float-label">
+        <p-dropdown
+          formControlName="radicacion"
+          [options]="radicacion"
+          optionLabel="concatenar"
+          optionValue="radicacion"
+          [filter]="true"
+          [showClear]="true"
+          inputId="proyecto"
+          placeholder="Seleccione un opcion"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="56"
+          [style]="{ width: '100%' }"
+        >
+        </p-dropdown>
+        <label for="proyecto" class="form-label">Proyecto</label>
+      </span>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <span class="p-float-label">
+        <textarea
+          class="form-control"
+          inputId="descripcion"
+          rows="3"
+          style="resize: none"
+          [style]="{ width: '100%' }"
+          pInputTextarea
+          formControlName="actDescripcion"
+        >
+        </textarea>
+        <label for="descripcion" class="form-label">Descripcion</label>
+      </span>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <span class="p-float-label">
+        <p-inputNumber
+          inputId="inputnumber"
+          mode="decimal"
+          formControlName="actTiempo"
+          [minFractionDigits]="0"
+          [maxFractionDigits]="2"
+          [style]="{ width: '25%' }"
+          pTooltip="Tiempo invertido"
+        ></p-inputNumber>
+        <label for="inputnumber">Tiempo invertido</label>
+      </span>
+    </div>
+    <div class="mt-4 mb-3 col-lg-4 col-md-12 col-sm-12">
+      <button type="button" class="btn btn-warning" (click)="crearActividad()">
+        Registrar
+      </button>
+    </div>
+    <div class="mt-4 col-sm-6 col-md-6 col-lg-1">
+      <i
+        class="pi pi-calendar mr-4 p-text-secondary"
+        pBadge
+        style="font-size: 2rem"
+        value="{{ valor }}"
+        severity="danger"
+        pTooltip="Horas registradas"
+        placeholder="Right"
+      ></i>
+    </div>
+  </form>
+  <div class="flex justify-content-center mb-3">
+    <br />
+    <p-table
+      class="table table-striped"
+      [value]="reporte"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="background-color: #ffc107; text-align: center">
+            Act Fecha
+          </th>
+          <th style="background-color: #ffc107; text-align: center">
+            Operacion
+          </th>
+          <th style="background-color: #ffc107; text-align: center">
+            Departamento
+          </th>
+          <th style="background-color: #ffc107; text-align: center">
+            Proyecto
+          </th>
+          <th style="background-color: #ffc107; text-align: center">
+            Descripcion
+          </th>
+          <th style="background-color: #ffc107; text-align: center">Tiempo</th>
+          <th style="background-color: #ffc107; text-align: center">Editar</th>
+          <th style="background-color: #ffc107; text-align: center">Borrar</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-reportado>
+        <tr>
+          <td style="text-align: center">
+            {{ reportado.actFecha | date : "dd/MM/yyyy" }}
+          </td>
+          <td style="text-align: center">{{ reportado.actActividad }}</td>
+          <td>{{ reportado.actDependencia }}</td>
+          <td>{{ reportado.radicacionTexto }}</td>
+          <td>{{ reportado.actDescripcion }}</td>
+          <td style="text-align: center">
+            {{ reportado.actTiempo | number : "1.1-20" }}
+          </td>
+          <td style="text-align: center">
+            <button
+              class="btn btn-outline-primary"
+              routerLink="/editar/{{ reportado.actSecuencia }}"
+              (click)="irEditarActividad(reportado.actSecuencia)"
+              pTooltip="Editar datos de actividad"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+          </td>
+          <td style="text-align: center">
+            <button
+              class="btn btn-outline-danger"
+              (click)="eliminarActividad(reportado.actSecuencia)"
+              pTooltip="Eliminar actividad"
+            >
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

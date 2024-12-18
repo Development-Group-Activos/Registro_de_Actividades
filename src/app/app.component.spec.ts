@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'registro_actividades'`, () => {
+  it(`should have as title 'JADM0068'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('registro_actividades');
+    expect(app.title).toEqual('JADM0068');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('registro_actividades app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('JADM0068 app is running!');
   });
 });

@@ -1,18 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './registro/actividades/login/login.component';
-import { RegistroComponent } from './registro/actividades/registro/registro.component';
-
+import { ActividadComponent } from './actividad/actividad.component';
+import { EditarActividadComponent } from './editar-actividad/editar-actividad.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full'}
-  
-
+  { path: 'registro/:ussIdSesion', component: ActividadComponent },
+  { path: '', redirectTo: '/registro', pathMatch: 'full' },
+  { path: 'editar/:actSecuencia', component: EditarActividadComponent }
 ];
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ CommonModule,
+    BrowserModule,
+    RouterModule.forRoot(routes,{
+      useHash: true
+   })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
