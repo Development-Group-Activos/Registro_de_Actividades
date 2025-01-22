@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ActividadComponent } from './actividad/actividad.component';
 import { EditarActividadComponent } from './editar-actividad/editar-actividad.component';
 
+
 const routes: Routes = [
   { path: 'registro/:ussIdSesion', component: ActividadComponent },
   { path: '', redirectTo: '/registro', pathMatch: 'full' },

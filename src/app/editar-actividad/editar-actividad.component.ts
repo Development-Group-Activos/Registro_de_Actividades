@@ -11,6 +11,7 @@ import { DependenciaFuncional } from '../model/dependenciaFuncional';
 import { DescripcionDominio } from '../model/descripcionDominio';
 import { Radicacion } from '../model/radicacion';
 import { EditarActividadService } from './editar-actividad.service';
+import { NotiflixService } from 'src/app/shared/notiflix-service/notiflix.service';
 
 @Component({
   selector: 'app-editar-actividad',
@@ -31,6 +32,7 @@ export class EditarActividadComponent implements OnInit {
   formEditar: FormGroup;
 
   constructor(
+    private _notiflixService: NotiflixService,
     private actividadService: ActividadService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -49,6 +51,7 @@ export class EditarActividadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._notiflixService.loadingStart('Cargando datos...');
     this.actividadService.getOperacion().subscribe((response: any) => {
       this.operacion = response;
     });
@@ -65,28 +68,32 @@ export class EditarActividadComponent implements OnInit {
       this.secuencia = paramMap['actSecuencia'];
       this.buscarActividad(this.secuencia);
     });
+
   }
 
   buscarActividad(codigo: any) {
-    this.editarService
-      .buscarActividadId(this.secuencia)
-      .subscribe((response) => {
-        this.consulta = response;
-        this.formEditar.setValue(this.consulta);
-      });
+    this.editarService.buscarActividadId(this.secuencia).subscribe((response) => {
+      this.consulta = response;
+      this.consulta.actSecuencia = this.secuencia;
+      this.formEditar.patchValue(this.consulta);
+    });
+    this._notiflixService.loadingClose(3000);
   }
+  
 
   public editarActividad() {
+    this._notiflixService.loadingStart('Actualizando datos...');
     this.formEditar.value.actSecuencia = this.secuencia;
     this.editarService
       .editarActividad(this.formEditar.value)
       .subscribe((response: any) => {
         Report.success(
           'Actualización',
-          'La actividad fue actualizada correctamene',
+          'La actividad fue actualizada correctamente,',
           'Aceptar'
         );
       });
+      this._notiflixService.loadingClose(3000);
   }
 
   public volver(){

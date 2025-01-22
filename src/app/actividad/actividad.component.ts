@@ -11,7 +11,7 @@ import { Notify } from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioSesion } from '../model/usuarioSesion';
-
+import { NotiflixService } from 'src/app/shared/notiflix-service/notiflix.service';
 @Component({
   selector: 'app-actividad',
   templateUrl: './actividad.component.html',
@@ -42,7 +42,8 @@ export class ActividadComponent implements OnInit {
   constructor(
     private actividadService: ActividadService,
     private formBuilder: FormBuilder,
-    private rutaActiva: ActivatedRoute
+    private rutaActiva: ActivatedRoute,
+    private _notiflixService: NotiflixService
   ) {
     this.formCrear = this.formBuilder.group({
       tdcTdEpl: [null],
@@ -62,10 +63,8 @@ export class ActividadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this._notiflixService.loadingStart('Cargando datos...');
     this.fechaFinal = this.dia  +  this.mes  +  this.anio;
-    /* this.formCrear.value.actFecha = this.fechaFinal */;
-
     this.usuario = this.rutaActiva.snapshot.params['ussIdSesion'];
     this.actividadService.getSesion(this.usuario).subscribe((response) => {
       this.usuarioSesion = response;
@@ -89,9 +88,11 @@ export class ActividadComponent implements OnInit {
         return this.concatenado.push(element);
       });
     });
+    this._notiflixService.loadingClose(3000);
   }
 
   public crearActividad() {
+    this._notiflixService.loadingStart('Guardando registro...');
     this.fecha = this.pipe.transform(
       this.formCrear.get('actFecha')?.value,
       'dd/MM/yyyy'
@@ -129,11 +130,18 @@ export class ActividadComponent implements OnInit {
     this.actividadService
       .crearActividad(this.formCrear.value)
       .subscribe((response: any) => {
+        if (response){
+          Notify.success('Actividad registrada');
+        }else{
+          Notify.failure('Fallo el registro'+ response);
+        };
         this.buscarActividad();
       });
+      this._notiflixService.loadingClose(2000);
   }
 
   public buscarActividad() {
+    this._notiflixService.loadingStart('Buscando registro...');
     this.usuarioBusqueda = this.usuarioSesion?.eplNd;
     this.fecha = this.pipe.transform(
       this.formCrear.get('actFecha')?.value,
@@ -160,9 +168,11 @@ export class ActividadComponent implements OnInit {
           Notify.info('No hay actividades registradas en la fecha ingresada');
         }
       });
+      this._notiflixService.loadingClose(1000);
   }
 
   public eliminarActividad(actSecuencia: number) {
+    this._notiflixService.loadingStart('Eliminando registro...');
     this.actividadService
       .eliminarActividad(actSecuencia)
       .subscribe((response: any) => {
@@ -173,6 +183,7 @@ export class ActividadComponent implements OnInit {
         );
         this.buscarActividad();
       });
+      this._notiflixService.loadingClose(3000);
   }
 
   public irEditarActividad(actSecuencia: number) {}
